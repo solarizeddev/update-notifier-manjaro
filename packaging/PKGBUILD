@@ -1,0 +1,57 @@
+# The update notifier for Manjaro: this repository is CachyOS's cachy-update
+# (a fork of arch-update), renamed for Manjaro at build time (manjaro/). Its tray icon and
+# notification open the Package Installer on its Updates page. Started for
+# every user at login (/etc/xdg/autostart) and checking with a systemd user
+# timer that is on for every user. Builds the checkout this file sits in:
+#   cd packaging && makepkg -sif
+pkgname=packageinstaller-manjaro-notifier-git
+pkgver=4.4.7
+pkgrel=1
+pkgdesc="Update notifier for Manjaro: tray icon and notifications that open the Package Installer (CachyOS's cachy-update)"
+arch=(x86_64)
+url='https://github.com/CachyOS/cachy-update'
+license=(GPL-3.0-or-later)
+depends=(archlinux-contrib bash curl diffutils fakeroot gettext glib2 hicolor-icon-theme htmlq libnotify
+         pacman pacman-contrib packageinstaller-manjaro systemd util-linux xdg-utils)
+makedepends=(cargo manjaro-icons scdoc)
+checkdepends=(bats)
+optdepends=('paru: count AUR updates too'
+            'flatpak: count Flatpak updates too')
+provides=(packageinstaller-manjaro-notifier)
+conflicts=(packageinstaller-manjaro-notifier arch-update cachy-update)
+
+_root=$(realpath "$startdir/..")
+
+prepare() {
+    # a copy of the checkout as it is, renamed; the checkout stays upstream's
+    rm -rf notifier && mkdir notifier
+    tar -C "$_root" --exclude=./.git --exclude=./packaging --exclude=./src/tray/target -cf - . | tar -C notifier -xf -
+    "$_root/manjaro/rebrand.sh" notifier
+}
+
+build() {
+    cd notifier
+    export CARGO_HOME="$srcdir/cargo"
+    make
+}
+
+check() {
+    cd notifier
+    make test
+}
+
+package() {
+    cd notifier
+    make PREFIX=/usr DESTDIR="$pkgdir" install
+    # the tray for every user, every desktop (each user can turn it off in
+    # their autostart settings); and the timer, on for every user
+    install -Dm644 res/desktop/arch-update-tray.desktop "$pkgdir/etc/xdg/autostart/arch-update-tray.desktop"
+    install -d "$pkgdir/usr/lib/systemd/user/timers.target.wants" "$pkgdir/usr/lib/systemd/user/default.target.wants"
+    ln -s ../arch-update.timer "$pkgdir/usr/lib/systemd/user/timers.target.wants/arch-update.timer"
+    # a check after every package change, so the icon is right after updating
+    install -Dm644 "$_root/manjaro/arch-update.path" "$pkgdir/usr/lib/systemd/user/arch-update.path"
+    ln -s ../arch-update.path "$pkgdir/usr/lib/systemd/user/default.target.wants/arch-update.path"
+    for unit in timer service; do
+        install -Dm644 "$_root/manjaro/no-system-users.conf" "$pkgdir/usr/lib/systemd/user/arch-update.$unit.d/manjaro.conf"
+    done
+}

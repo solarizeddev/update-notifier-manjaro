@@ -1,3 +1,5 @@
+> **This repository is the Manjaro build of CachyOS's cachy-update.** See [MANJARO.md](MANJARO.md) for what differs and how to build it.
+
 # Cachy-Update (fork of [Arch-Update](https://github.com/Antiz96/arch-update))
 
 <p align="center">

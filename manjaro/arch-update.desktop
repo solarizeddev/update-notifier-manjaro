@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Manjaro Update
+Comment=Opens the Package Installer on its Updates page
+Icon=manjarolinux
+Exec=packageinstaller-manjaro --updates
+Terminal=false
+NoDisplay=true

@@ -1,0 +1,13 @@
+# Manjaro: checks again whenever packages change (an update in the Package
+# Installer, pacman or pamac), so the tray icon does not keep showing updates
+# that are installed.
+[Unit]
+Description=Run arch-update auto check after package changes
+ConditionUser=!@system
+
+[Path]
+PathChanged=/var/lib/pacman/local
+Unit=arch-update.service
+
+[Install]
+WantedBy=default.target

@@ -3,3 +3,8 @@
 *.mo
 messages.po
 target/
+
+# makepkg in packaging/
+/packaging/src/
+/packaging/pkg/
+/packaging/*.pkg.tar.*
