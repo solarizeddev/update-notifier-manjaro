@@ -55,17 +55,21 @@ Log out and in again to get the tray.
 ## Merging an upstream release
 
 ```bash
-git remote add upstream https://github.com/CachyOS/cachy-update.git   # once
-git fetch upstream
-git merge upstream/main
-INSTALLER=../packageinstaller-manjaro tools/test-manjaro.sh
+tools/update-upstream.sh
 ```
 
-The test builds both packages with makepkg in a Manjaro container and checks
-the autostart, the timer, the icons, the update check and the click opening
-the Updates page. The tray itself needs a panel: check it on Plasma. A new
-upstream text naming CachyOS or Cachy-Update is renamed by itself; the build
-stops if one is left.
+It fetches upstream (adding the `upstream` remote the first time), merges
+`upstream/main`, checks on a copy that the renaming still covers everything
+(it stops on a CachyOS name it does not know, or on a changed Manjaro logo
+file: fix `manjaro/` then), then builds, tests and installs with
+`makepkg -sif`. It does not push: log out and in, check the tray icon and that
+a click opens the Updates page, then `git push`. `--no-install` stops after
+the checks. A conflict in README.md's first line is resolved by itself; for
+any other, keep upstream's side, commit, and run it again.
+
+`INSTALLER=../packageinstaller-manjaro tools/test-manjaro.sh` builds both
+packages in a clean Manjaro container and checks them together (needs docker).
+
 
 ## What differs from upstream
 
