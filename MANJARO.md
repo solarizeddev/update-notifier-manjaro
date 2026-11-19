@@ -64,7 +64,7 @@ It fetches upstream (adding the `upstream` remote the first time), merges
 file: fix `manjaro/` then), then builds, tests and installs with
 `makepkg -sif`. It does not push: log out and in, check the tray icon and that
 a click opens the Updates page, then `git push`. `--no-install` stops after
-the checks. A conflict in README.md's first line is resolved by itself; for
+the checks. A conflict in README.md is resolved by itself (upstream's README under our header, `manjaro/README-header.md`); for
 any other, keep upstream's side, commit, and run it again.
 
 `INSTALLER=../packageinstaller-manjaro tools/test-manjaro.sh` builds both

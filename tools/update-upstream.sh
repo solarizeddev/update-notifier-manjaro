@@ -13,7 +13,6 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 upstream_url=https://github.com/CachyOS/cachy-update.git
-pointer="> **This repository is the Manjaro build of CachyOS's cachy-update.** See [MANJARO.md](MANJARO.md) for what differs and how to build it."
 install=1
 ref=upstream/main
 for arg in "$@"; do
@@ -24,13 +23,20 @@ for arg in "$@"; do
     esac
 done
 
+# README.md is manjaro/README-header.md followed by upstream's README without
+# its title: on a conflict take upstream's and put the header back.
+readme_with_header() {
+    { cat manjaro/README-header.md; sed '1{/^# /d}' README.md | sed '/./,$!d'; } > README.md.new
+    mv README.md.new README.md
+}
+
 say() { printf '\n\033[1m==> %s\033[0m\n' "$*"; }
 
-# README.md only differs by our pointer line: take upstream's, put the line back
+# README.md: upstream's, with our header put back
 resolve_readme() {
     git diff --name-only --diff-filter=U | grep -qx README.md || return 0
     git checkout --theirs -- README.md
-    grep -qF "$pointer" README.md || printf '%s\n\n%s\n' "$pointer" "$(cat README.md)" > README.md
+    readme_with_header
     git add README.md
     [ -n "$(git diff --name-only --diff-filter=U)" ] || git commit --no-edit >/dev/null
 }
@@ -39,7 +45,7 @@ conflict_help() {
     cat <<'EOF'
 
 The code is upstream's; ours are manjaro/, packaging/, tools/, MANJARO.md and
-the line at the top of README.md. Keep upstream's side everywhere else. Then:
+the header of README.md (manjaro/README-header.md). Keep upstream's side everywhere else. Then:
   git add <files> && git commit       (or: git merge --abort to undo)
 and run this script again: it goes on with the checks and the install.
 EOF
