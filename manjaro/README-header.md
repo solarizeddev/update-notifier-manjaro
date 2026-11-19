@@ -1,5 +1,8 @@
 # update-notifier-manjaro
 
+> **Community project.** Not affiliated with or endorsed by Manjaro GmbH & Co. KG
+> or CachyOS. Manjaro and the Manjaro logo are trademarks of Manjaro GmbH & Co. KG.
+
 The update notifier for [Manjaro](https://manjaro.org): a port of
 [CachyOS's cachy-update](https://github.com/CachyOS/cachy-update) (itself a
 fork of [Arch-Update](https://github.com/Antiz96/arch-update)). At login a
@@ -10,9 +13,6 @@ on its Updates page.
 
 What differs from CachyOS's version, how to build it and how upstream
 releases are merged: [MANJARO.md](MANJARO.md).
-
-> A community project, not affiliated with or endorsed by Manjaro GmbH & Co. KG
-> or CachyOS. Manjaro and the Manjaro logo are trademarks of Manjaro GmbH & Co. KG.
 
 ---
 
