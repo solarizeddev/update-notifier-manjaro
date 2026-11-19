@@ -28,13 +28,17 @@ for arg in "$@"; do
 done
 
 # README.md is manjaro/README-header.md followed by upstream's README without
-# its title and its logo (the first centred picture): on a conflict take
-# upstream's and put the header back.
+# its title, its logo (the first centred picture), its Screenshots section and
+# any other picture of theirs (they show Arch-Update's icons): on a conflict
+# take upstream's and put the header back.
 readme_with_header() {
     { cat manjaro/README-header.md
       sed '1{/^# /d}' README.md | sed '/./,$!d' \
           | awk '!done && /^<p align="center">/ {skip=1} skip {if (/<\/p>/) {skip=0; done=1}; next} {print}' \
-          | sed '/./,$!d'; } > README.md.new
+          | awk '/^#+ Screenshots/ {s=1; next} s && /^#/ {s=0} !s {print}' \
+          | grep -v '^!\[[^]]*\](https://github.com/user-attachments/' \
+          | sed 's/ *See \[screenshots\](#screenshots)[^.]*\.//' \
+          | sed '/./,$!d' | cat -s; } > README.md.new
     mv README.md.new README.md
 }
 

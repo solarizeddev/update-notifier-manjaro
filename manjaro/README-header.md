@@ -7,6 +7,8 @@ A tray icon for [Manjaro](https://manjaro.org) that shows when updates are
 waiting (packages, AUR, Flatpak). It is a port of
 [CachyOS's cachy-update](https://github.com/CachyOS/cachy-update).
 
+<p align="center"><img src="manjaro/icon.svg" width="128" alt="The tray icon: the Manjaro logo with a dot while updates wait"></p>
+
 Install: first [packageinstaller-manjaro](https://github.com/solarizeddev/packageinstaller-manjaro),
 then clone this repo and run `cd packaging && makepkg -sif`. Log out and in to get the tray.
 
@@ -14,7 +16,7 @@ then clone this repo and run `cd packaging && makepkg -sif`. Log out and in to g
 
 ---
 
-*Below is CachyOS's README (without its logo). In this build "Cachy-Update" is
-"Manjaro Update", a click opens the Package Installer instead of a terminal,
-and the icons show the Manjaro logo; the pictures below are upstream's.*
+*Below is CachyOS's README, without its logo and screenshots. In this build
+"Cachy-Update" is "Manjaro Update", and a click opens the Package Installer
+instead of a terminal.*
 
