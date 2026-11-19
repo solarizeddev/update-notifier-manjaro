@@ -12,14 +12,16 @@ waiting (packages, AUR, Flatpak). It is a port of
 Install: first [packageinstaller-manjaro](https://github.com/solarizeddev/packageinstaller-manjaro),
 then clone this repo and run `cd packaging && makepkg -sif`. Log out and in to get the tray.
 
-Update from CachyOS: `tools/update-upstream.sh` merges their latest changes,
-checks the Manjaro renaming, then builds and installs.
+Merge new CachyOS changes: `tools/update-upstream.sh` merges them, checks the
+Manjaro renaming, then builds and installs. Nothing is pushed.
 
-- [MANJARO.md](MANJARO.md): what differs from CachyOS's version, building, merging upstream.
+- [MANJARO.md](MANJARO.md): what differs from CachyOS's version.
 
 ---
 
-*Below is CachyOS's README, without its logo and screenshots. In this build
-"Cachy-Update" is "Manjaro Update", and a click opens the Package Installer
-instead of a terminal.*
+*Below is CachyOS's README, without its logo and screenshots. Skip its
+Installation section, and the enable commands under Usage: the package above
+starts the tray and the update checks for every user. In this build
+"Cachy-Update" is "Manjaro Update", the command is `arch-update` (not
+`cachy-update`), and a click opens the Package Installer instead of a terminal.*
 
