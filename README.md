@@ -14,12 +14,9 @@ then clone this repo and run `cd packaging && makepkg -sif`. Log out and in to g
 
 ---
 
-*Below is CachyOS's README, unchanged. In this build "Cachy-Update" is
-"Manjaro Update", and a click opens the Package Installer instead of a terminal.*
-
-<p align="center">
-  <img width="460" height="300" src="https://github.com/user-attachments/assets/5782bd11-084a-4ca3-b599-1c322ee11b84">
-</p>
+*Below is CachyOS's README (without its logo). In this build "Cachy-Update" is
+"Manjaro Update", a click opens the Package Installer instead of a terminal,
+and the icons show the Manjaro logo; the pictures below are upstream's.*
 
 ## Table of contents
 
