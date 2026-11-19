@@ -1,24 +1,21 @@
 # update-notifier-manjaro
 
-> **Community project.** Not affiliated with or endorsed by Manjaro GmbH & Co. KG
-> or CachyOS. Manjaro and the Manjaro logo are trademarks of Manjaro GmbH & Co. KG.
+> Community project, not affiliated with or endorsed by Manjaro GmbH & Co. KG
+> or CachyOS. The Manjaro name and logo are trademarks of Manjaro GmbH & Co. KG.
 
-The update notifier for [Manjaro](https://manjaro.org): a port of
-[CachyOS's cachy-update](https://github.com/CachyOS/cachy-update) (itself a
-fork of [Arch-Update](https://github.com/Antiz96/arch-update)). At login a
-tray icon with the Manjaro logo shows whether updates are waiting (packages,
-AUR, Flatpak); a click, or the notification, opens the
-[Package Installer for Manjaro](https://github.com/solarizeddev/packageinstaller-manjaro)
-on its Updates page.
+A tray icon for [Manjaro](https://manjaro.org) that shows when updates are
+waiting (packages, AUR, Flatpak). It is a port of
+[CachyOS's cachy-update](https://github.com/CachyOS/cachy-update).
 
-What differs from CachyOS's version, how to build it and how upstream
-releases are merged: [MANJARO.md](MANJARO.md).
+Install: first [packageinstaller-manjaro](https://github.com/solarizeddev/packageinstaller-manjaro),
+then clone this repo and run `cd packaging && makepkg -sif`. Log out and in to get the tray.
+
+- [MANJARO.md](MANJARO.md): what differs from CachyOS's version, building, merging upstream.
 
 ---
 
-*The rest of this file is CachyOS's README, kept as upstream has it. In the
-Manjaro build, "Cachy-Update" is "Manjaro Update", a click opens the Package
-Installer instead of a terminal, and the icons show the Manjaro logo.*
+*Below is CachyOS's README, unchanged. In this build "Cachy-Update" is
+"Manjaro Update", and a click opens the Package Installer instead of a terminal.*
 
 <p align="center">
   <img width="460" height="300" src="https://github.com/user-attachments/assets/5782bd11-084a-4ca3-b599-1c322ee11b84">
