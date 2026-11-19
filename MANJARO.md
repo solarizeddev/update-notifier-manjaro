@@ -43,6 +43,13 @@ The `arch-update` command is kept as upstream's: run in a terminal, it
 updates interactively and shows the Arch Linux news, not Manjaro's
 announcements.
 
+## Without the Manjaro logo
+
+`NO_MANJARO_LOGO=1 makepkg -sif` (or `tools/update-upstream.sh --no-logo`) draws
+the tray icons as a generic box with a down arrow instead of the Manjaro logo,
+and needs no logo file. For when Manjaro asks us not to use the logo; the
+Package Installer has the same switch.
+
 ## Build
 
 ```bash

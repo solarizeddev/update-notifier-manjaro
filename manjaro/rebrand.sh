@@ -26,6 +26,10 @@ grep -rl -e 'Cachy-Update' -e 'CachyOS' src res/desktop po | while read -r f; do
 done
 
 cp "$here/arch-update.desktop" res/desktop/arch-update.desktop
+# NO_MANJARO_LOGO=1: a generic icon in place of the Manjaro logo (make-icons.sh too)
+if [ "${NO_MANJARO_LOGO:-0}" != 0 ]; then
+    sed -i 's/^Icon=manjarolinux$/Icon=system-software-update/' res/desktop/arch-update.desktop
+fi
 
 # the first check a few minutes after login (upstream: up to an hour later)
 sed -i 's/^RandomizedDelaySec=.*/RandomizedDelaySec=5min/' res/systemd/arch-update.timer

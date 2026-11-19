@@ -21,6 +21,7 @@ provides=(packageinstaller-manjaro-notifier)
 conflicts=(packageinstaller-manjaro-notifier arch-update cachy-update)
 
 _root=$(realpath "$startdir/..")
+# NO_MANJARO_LOGO=1 makepkg -sif: generic tray icons in place of the Manjaro logo
 
 prepare() {
     # a copy of the checkout as it is, renamed; the checkout stays upstream's

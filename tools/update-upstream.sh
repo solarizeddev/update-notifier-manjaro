@@ -3,14 +3,17 @@
 # checks that the Manjaro renaming still covers everything, then builds,
 # tests and installs the package (makepkg -sif). Nothing is pushed.
 #
-# Usage: tools/update-upstream.sh [--no-install] [REF]
+# Usage: tools/update-upstream.sh [--no-install] [--no-logo] [REF]
 #   REF          what to merge; by default upstream/main
 #   --no-install merge and check only
+#   --no-logo    build with a generic icon in place of the Manjaro logo
+#                (same as NO_MANJARO_LOGO=1 makepkg -sif)
 #
 # On conflicts it stops; fix them, commit, and run it again to go on.
 # After it: log out and in, try it, then git push.
 set -euo pipefail
-cd "$(dirname "$0")/.."
+self=$(readlink -f "$0")
+cd "$(dirname "$self")/.."
 
 upstream_url=https://github.com/CachyOS/cachy-update.git
 install=1
@@ -18,7 +21,8 @@ ref=upstream/main
 for arg in "$@"; do
     case $arg in
     --no-install) install=0 ;;
-    -h | --help) sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    --no-logo) export NO_MANJARO_LOGO=1 ;;
+    -h | --help) sed -n '2,14p' "$self" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) ref=$arg ;;
     esac
 done
